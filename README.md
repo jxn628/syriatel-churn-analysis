@@ -1,4 +1,4 @@
-# Phase 3 Project - SyriaTel Churn Analysis
+# Classification Model for Predicting & Analyzing Churn
 
 ## Summary
 
