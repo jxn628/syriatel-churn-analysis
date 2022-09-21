@@ -44,7 +44,7 @@ and most importantly:
 - Churn: Customers who cancelled their service.
 
 ## Evaluation Metrics
-1. <b>High Recall Score:</b> I want my model to be able to predict which customers are at risk of churning. If it is tuned to be too sensitive in this area, that is fine. I would rather flag customers that aren't going to churn rather than focus on the customers that are likely to stay, and ending up with unexpected churn. I will keep this in balance by checking F1 Score.
+1. <b>High Recall Score:</b> I want my model to be able to predict which customers are at risk of churning. If it is tuned to be too sensitive in this area, that is fine. <b>I would rather flag customers that aren't going to churn</b> rather than focus on the customers that are likely to stay, and ending up with unexpected churn. <b>I will keep this in balance by checking F1 Score.</b>
 
 2. <b>Good F1 Score:</b>While I am ultimately not concerned with Precision (how well the model predicts customers that will stay), a good F1 score means that the model is performing well on both Recall and Precision. Since Recall and Precision are inverses of each other, a good F1 score ensures that the model isn't skewed too far toward one or the other. (ie, a model that predicts EVERY customer will churn would have perfect Recall, but would be useless).
 
@@ -91,7 +91,7 @@ All other features have (at most) half of the feature significance as the top 4.
 
 ## International Plan
 ### Analysis:
-<i>NOTE: Data shows that Customers without the international plan were still able to make international calls. I am operating under the assumption that the data is correct and that there is a seperate International Plan, as indicated bty the "International Plan" column. I am also assuming that the data contained in that field is accurate.</i>
+<i>NOTE: Data shows that Customers without the international plan were still able to make international calls. I am operating under the assumption that the data is correct and that there is a seperate International Plan, as indicated by the "International Plan" column. I am also assuming that the data contained in that field is accurate.</i>
 
 - only 323 people (9.5% of customers) have international plans. But those that do have a high rate of churn.
 - <b>churn rate for customers with an international plan is 42.4% vs 11.5% for those without an international plan.</b>
@@ -111,7 +111,7 @@ All other features have (at most) half of the feature significance as the top 4.
 ### Analysis:
 - 323 people (27.6% of customers) have a voicemail plan.
 - <b>Customers that do NOT have a voicemail plan have twice the churn rate of customers that do.</b>
-- The churn rate for customers without voicemail is slightly higher than the base churn rate, but since the churn rate for customers with voicemail is significantly lower, that gives this good overall significance.
+- The churn rate for customers without voicemail is slightly higher than the base churn rate, but since <b>the churn rate for customers with voicemail is significantly lower</b>, this feature does end up having significance.
 
 # Recommendations
 
@@ -137,7 +137,7 @@ All other features have (at most) half of the feature significance as the top 4.
 - Also, analyze to see why there is such a big difference in churn rate when customers don't have a voice mail plan.
 
 ## Recommendation #5: Set up a system which identifies when a customer is getting close to any of the thresholds identified above.
-- Please Note: These recommenations are based on the way that everything is currently set up. If my other recommendations are followed, many of these issues would already be taken care of.
+- Please Note: These recommendations are based on the way that everything is currently set up. If my other recommendations are followed, many of these issues would already be taken care of.
 
 ### Green: Low Risk of Customer Churn.
 - 0-1 Customer Service Calls.
@@ -154,4 +154,33 @@ All other features have (at most) half of the feature significance as the top 4.
 - Customer Monthly Bill is at $74 or higher.
 - Customer has International Plan (in it's current form. See Recommendation #2)
 - Customer does not have a Voice Mail Plan
+
+## Conclusion
+I was tasked with analyzing the data provided to me by SyriaTel in relation to customers leaving their service. In doing so, I determined that the most important questions to answer were:
+1. What is the Baseline Churn Rate?
+2. Which features contribute to churn?
+3. Which features have the biggest impact on churn?
+4. What can be done to identify when a customer is at risk for churn?
+5. What can be done to prevent churn?
+
+After developing an appropriate model (XGBoost, using GridSearch CV to tune parameters), I was able to determine that the 4 features with the largest impact on customer churn were:
+1. Total Charge
+2. High Amount of Customer Service Calls
+3. The presence of an International Plan.
+4. The presence of a Voice Mail Plan.
+
+Based on these factors, I made the following recommendations for SyriaTel to implement in order to greatly reduce the amount of churn:
+1. Improve Customer Service: Get to the root of customers' issues and resolve them.
+2. Take a good look at the international plan that is currently offered and see why customers who have it have such a high rate of churn. Change the plan as necessary to prevent this from happening going forward.
+3. Change the pricing model from "minutes used" to a flat rate service so that customers will know what to expect to pay each month, while still retaining profit for SyriaTel.
+4. Incentivize getting a VoiceMail Plan. Also investigate why it helps retain customers.
+5. Put a system into place for identifying when a customer is at high risk for churn and then be proactive in intervening and helping fix anything that may be leading to churn.
+
+<b>SyriaTel will always have churn, but if they focus on dealing with the features which have the greatest impact on churn, their average churn rate will be significantly lower. I have also provided some metrics for them to use to better identify when customers are at an increased chance of churn.</b>
+
+
+## Links
+[Final Jupyter Notebook](https://github.com/jxn628/syriatel-churn-analysis/blob/main/EDA-Modeling_Evaluation.ipynb)
+
+[Presentation Slides](https://github.com/jxn628/syriatel-churn-analysis/blob/main/ChurnAnalysisPresentation.pdf)
 
